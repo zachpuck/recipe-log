@@ -1,0 +1,33 @@
+{
+  "name": "recipe-log",
+  "version": "0.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zachpuck/recipe-log.git"
+  },
+  "author": "zach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zachpuck/recipe-log/issues"
+  },
+  "homepage": "https://github.com/zachpuck/recipe-log#readme",
+  "dependencies": {
+    "express": "^4.15.4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-inject": "^4.3.0",
+    "gulp-jscs": "^4.0.0",
+    "gulp-jshint": "^2.0.4",
+    "gulp-nodemon": "^2.2.1",
+    "jshint": "^2.9.5",
+    "jshint-stylish": "^2.2.1",
+    "wiredep": "^4.0.0"
+  }
+}
