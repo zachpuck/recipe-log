@@ -18,20 +18,12 @@ app.use(express.static('public'));
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-
-
 app.use('/Recipes', recipeRouter);
 
 app.get('/', function(req, res) {
     res.render('index', {
         title: 'welcome to the recipe log',
-        nav: [{
-                Link: '/Recipes',
-                Text: 'Recipes'
-            }, {
-                Link: '/Ingredients',
-                Text: 'Ingredients'
-            }]
+        nav: nav
     });
 });
 
@@ -42,5 +34,3 @@ app.get('/Recipes', function(req, res){
 app.listen(port, function(err) {
     console.log('running server on port ', port);
 });
-
-console.log(recipe);
