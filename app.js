@@ -4,7 +4,15 @@ const recipe = {};
 const app = express();
 const port = process.env.PORT || 5000;
 
-const recipeRouter = require('./src/routes/recipeRoutes');
+const nav = [{
+    Link: '/Recipes',
+    Text: 'Recipes'
+}, {
+    Link: '/Ingredients',
+    Text: 'Ingredients'
+}];
+
+const recipeRouter = require('./src/routes/recipeRoutes')(nav);
 
 app.use(express.static('public'));
 app.set('views', './src/views');
