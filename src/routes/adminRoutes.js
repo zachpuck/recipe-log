@@ -17,6 +17,17 @@ let recipes = [
     }
 ];
 
+let ingredients = [
+    {
+        title: 'vegitable oil',
+        brand: 'kroger'
+    },
+    {
+        title: 'olive oil',
+        brand: 'napolean'
+    }
+];
+
 const router = function (nav) {
 
     adminRouter.route('/addRecipes')
@@ -31,8 +42,21 @@ const router = function (nav) {
                     }
                 );
             });
-            // res.send('inserting recipes');
         });
+
+    adminRouter.route('/addIngredients')
+    .get(function (req, res) {
+        let url = 'mongodb://localhost:27017/recipeApp';
+        mongodb.connect(url, function(err, db) {
+            let collection = db.collection('ingredients');
+            collection.insertMany(ingredients,
+                function(err, results) {
+                    res.send(results);
+                    db.close();
+                }
+            );
+        });
+    });
 
     return adminRouter;
 };
