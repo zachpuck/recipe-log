@@ -1,37 +1,40 @@
 const express = require('express');
 const recipeRouter = express.Router();
+// https://www.npmjs.com/package/mongodb
+const mongodb = require('mongodb').MongoClient;
+const ObjectId = require('mongodb').ObjectID;
 
 const router = function(nav) {
-    let recipes = [
-        {
-            title: 'chicken pot pie',
-            ingredients: 'pie crust, peas, carrots, chicken',
-            time: '1 hr',
-            haveCooked: false
-        },
-        {
-            title: 'ramen noodles',
-            ingredients: 'noodles, shrimp, dashi, mushrooms',
-            time: '30 mins',
-            haveCooked: true
-        }
-    ];
     recipeRouter.route('/')
         .get(function(req, res) {
-            res.render('recipeListView', {
-                title: 'recipe list',
-                nav: nav,
-                recipes: recipes
+            let url = 'mongodb://localhost:27017/recipeApp';
+            mongodb.connect(url, function(err, db) {
+                let collection = db.collection('recipes');
+                collection.find({}).toArray(
+                    function (err, results) {
+                        res.render('recipeListView', {
+                            title: 'recipe list',
+                            nav: nav,
+                            recipes: results
+                        });
+                    });
             });
         });
 
     recipeRouter.route('/:id')
         .get(function(req, res) {
-            let id = req.params.id;
-            res.render('recipeView', {
-                title: 'recipe list',
-                nav: nav,
-                recipes: recipes[id]
+            let id = new ObjectId(req.params.id);
+            let url = 'mongodb://localhost:27017/recipeApp';
+            mongodb.connect(url, function(err, db) {
+                let collection = db.collection('recipes');
+                collection.findOne({_id: id},
+                    function (err, results) {
+                        res.render('recipeView', {
+                            title: 'recipe',
+                            nav: nav,
+                            recipe: results
+                        });
+                    });
             });
         });
     return recipeRouter;

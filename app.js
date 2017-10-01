@@ -13,14 +13,16 @@ const nav = [{
 
 const recipeRouter = require('./src/routes/recipeRoutes')(nav);
 const ingredientRouter = require('./src/routes/ingredientRoutes')(nav);
-
-app.set('views', './src/views');
-app.set('view engine', 'ejs');
+const adminRouter = require('./src/routes/adminRoutes')(nav);
 
 app.use(express.static('public'));
+app.set('views', './src/views');
+
+app.set('view engine', 'ejs');
 
 app.use('/Recipes', recipeRouter);
 app.use('/Ingredients', ingredientRouter);
+app.use('/Admin', adminRouter);
 
 app.get('/', function(req, res) {
     res.render('index', {
