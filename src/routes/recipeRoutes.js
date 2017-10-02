@@ -1,49 +1,18 @@
 const express = require('express');
 const recipeRouter = express.Router();
 // https://www.npmjs.com/package/mongodb
-const mongodb = require('mongodb').MongoClient;
-const ObjectId = require('mongodb').ObjectID;
+// const mongodb = require('mongodb').MongoClient;
+// const ObjectId = require('mongodb').ObjectID;
+const recipeController = require('../controllers/recipeController');
 
 const router = function(nav) {
-
-    recipeRouter.use(function(req, res, next) {
-        if (!req.user) {
-            res.redirect('/');
-        }
-        next();
-    });
+    const recipeController = require('../controllers/recipeController')(null, nav);
+    recipeRouter.use(recipeController.middleware);
     recipeRouter.route('/')
-        .get(function(req, res) {
-            let url = 'mongodb://localhost:27017/recipeApp';
-            mongodb.connect(url, function(err, db) {
-                let collection = db.collection('recipes');
-                collection.find({}).toArray(
-                    function (err, results) {
-                        res.render('recipeListView', {
-                            title: 'recipe list',
-                            nav: nav,
-                            recipes: results
-                        });
-                    });
-            });
-        });
+        .get(recipeController.getIndex);
 
     recipeRouter.route('/:id')
-        .get(function(req, res) {
-            let id = new ObjectId(req.params.id);
-            let url = 'mongodb://localhost:27017/recipeApp';
-            mongodb.connect(url, function(err, db) {
-                let collection = db.collection('recipes');
-                collection.findOne({_id: id},
-                    function (err, results) {
-                        res.render('recipeView', {
-                            title: 'recipe',
-                            nav: nav,
-                            recipe: results
-                        });
-                    });
-            });
-        });
+        .get(recipeController.getById);
     return recipeRouter;
 };
 module.exports = router;
