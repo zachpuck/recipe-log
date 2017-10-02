@@ -5,6 +5,13 @@ const mongodb = require('mongodb').MongoClient;
 const ObjectId = require('mongodb').ObjectID;
 
 const router = function(nav) {
+
+    recipeRouter.use(function(req, res, next) {
+        if (!req.user) {
+            res.redirect('/');
+        }
+        next();
+    });
     recipeRouter.route('/')
         .get(function(req, res) {
             let url = 'mongodb://localhost:27017/recipeApp';
