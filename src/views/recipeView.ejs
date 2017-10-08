@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Recipe Log</title>
+		<title>Recipe</title>
 		<meta name="generator" content="Bootply" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <!-- bower:css -->
@@ -59,7 +59,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-7">
-        <h1>Recipe Log
+        <h1>Recipe
           <p class="lead"></p>
         </h1>
       </div>
@@ -101,26 +101,21 @@
           <div class="row">    
             <br>
             <div class="col-md-2 col-sm-3 text-center">
-              Sign In
-                <form name="signInForm" 
-                      action="/auth/signIn"
-                      method="post">
-                    User Name: <input name="userName" id="userName"> <br />
-                    Password: <input name="password" id="password"> <br />
-                    <input type="submit" value="Sign in">
-                </form>
+              <a class="story-title" href="#"><img alt="" src="<%=recipe.recipe.recipe.image_url%>" style="width:100px;height:100px" class="img-circle"></a>
             </div>
             <div class="col-md-10 col-sm-9">
-              Sign Up
-                <form name="signUpForm" 
-                      action="/auth/signUp"
-                      method="post">
-                    User Name:<input name="userName" id="userName"> <br />
-                    Password: <input name="password" id="password"> <br />
-                    <input type="submit" value="Sign up">
-                </form>
+              <h3><%=recipe.title%></h3>
+              <div class="row">
+                <div class="col-xs-9">
+                  <h4><span class="label label-default">Ingredients: <%=recipe.ingredients%></span></h4><h4>
+                  <h4><span class="label label-default">Cook Time: <%=recipe.time%></span></h4><h4>
+                  </h4></div>
+                <div class="col-xs-3"></div>
+              </div>
+              <br><%=recipe.recipe.recipe.ingredients%><br>
             </div>
           </div>
+          <hr>
           <!--/stories-->
           
           

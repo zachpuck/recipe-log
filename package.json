@@ -1,7 +1,7 @@
 {
   "name": "recipe-log",
   "version": "0.0.0",
-  "description": "",
+  "description": "log of recipes",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -18,8 +18,16 @@
   },
   "homepage": "https://github.com/zachpuck/recipe-log#readme",
   "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.7",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "express-session": "^1.15.6",
+    "http": "0.0.0",
+    "mongodb": "^2.2.31",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
