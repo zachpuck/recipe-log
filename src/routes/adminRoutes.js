@@ -7,12 +7,14 @@ let recipes = [
         title: 'chicken pot pie',
         ingredients: 'pie crust, peas, carrots, chicken',
         time: '1 hr',
+        recipeId: '28921',
         haveCooked: false
     },
     {
         title: 'ramen noodles',
         ingredients: 'noodles, shrimp, dashi, mushrooms',
         time: '30 mins',
+        recipeId: 'e33b45',
         haveCooked: true
     }
 ];

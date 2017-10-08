@@ -3,9 +3,6 @@ const ObjectId = require('mongodb').ObjectID;
 
 const recipeController = function(recipeService, nav) {
     let middleware = function(req, res, next) {
-        // if (!req.user) {
-        //     res.redirect('/');
-        // }
         next();
     };
     let getIndex = function(req, res) {
@@ -30,11 +27,23 @@ const recipeController = function(recipeService, nav) {
             let collection = db.collection('recipes');
             collection.findOne({_id: id},
                 function (err, results) {
-                    res.render('recipeView', {
-                        title: 'recipe',
-                        nav: nav,
-                        recipe: results
-                    });
+                    if (results.recipeId) {
+                        recipeService.getRecipeById(results.recipeId,
+                            function(err, recipe) {
+                                results.recipe = recipe;
+                                res.render('recipeView', {
+                                    title: 'recipe',
+                                    nav: nav,
+                                    recipe: results
+                                });
+                            });
+                    } else {
+                        res.render('recipeView', {
+                            title: 'recipe',
+                            nav: nav,
+                            recipe: results
+                        });
+                    }
                 });
         });
     };
@@ -42,7 +51,7 @@ const recipeController = function(recipeService, nav) {
         middleware: middleware,
         getIndex: getIndex,
         getById: getById
-    }
-}
+    };
+};
 
 module.exports = recipeController;

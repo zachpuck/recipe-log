@@ -6,7 +6,6 @@ const passport = require('passport');
 const router = function() {
     authRouter.route('/signUp')
         .post(function(req, res) {
-            console.log(req.body);
             let url = 'mongodb://localhost:27017/recipeApp';
             mongodb.connect(url, function(err, db) {
                 let collection = db.collection('users');

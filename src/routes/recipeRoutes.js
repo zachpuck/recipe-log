@@ -1,12 +1,9 @@
 const express = require('express');
 const recipeRouter = express.Router();
-// https://www.npmjs.com/package/mongodb
-// const mongodb = require('mongodb').MongoClient;
-// const ObjectId = require('mongodb').ObjectID;
-const recipeController = require('../controllers/recipeController');
 
 const router = function(nav) {
-    const recipeController = require('../controllers/recipeController')(null, nav);
+    const recipeService = require('../services/food2forkService')();
+    const recipeController = require('../controllers/recipeController')(recipeService, nav);
     recipeRouter.use(recipeController.middleware);
     recipeRouter.route('/')
         .get(recipeController.getIndex);

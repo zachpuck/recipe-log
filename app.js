@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const session = require('express-session');
+require('dotenv').config();
 
 const app = express();
 const port = process.env.PORT || 5000;
